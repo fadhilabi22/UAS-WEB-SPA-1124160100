@@ -99,6 +99,7 @@
                 required
             >
         </div>
+    <!-- metode Pembayaran -->
     <div>
         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
             Metode Pembayaran
@@ -120,6 +121,95 @@
                 <input type="radio" name="paymentMethod" value="cash" class="text-blue-600 focus:ring-blue-500 dark:text-blue-400 dark:focus:ring-blue-400">
                 <span class="ml-2 text-sm text-gray-700 dark:text-gray-300 transition-colors duration-300">Bayar Tunai</span>
             </label>
+        </div>
+    </div>
+     <div>
+        <label for="promoCodes" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
+            Kode Promo (Opsional)
+        </label>
+        <div class="flex gap-2">
+            <input 
+                type="text" 
+                id="promoCode"
+                name="promoCode"
+                placeholder="Masukkan kode promo"
+                class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-300"
+            >
+            <button 
+                type="button" 
+                id="applyPromoBtn"
+                class="px-4 py-2 bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
+            >
+                Terapkan
+            </button>
+        </div>
+        <div id="promoMessage" class="mt-2 text-sm hidden transition-colors duration-300"></div>
+    </div>
+
+    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 transition-all duration-300">
+        <div class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-300 mb-2 transition-colors duration-300">
+            <span>Subtotal:</span>
+            <span id="subtotal">Rp 0</span>
+        </div>
+        <div id="discountRow" class="flex justify-between items-center text-sm text-green-600 dark:text-green-400 mb-2 hidden transition-colors duration-300">
+            <span>Diskon:</span>
+            <span id="discount">Rp 0</span>
+        </div>
+        <div class="flex justify-between items-center text-lg font-semibold text-gray-800 dark:text-white border-t pt-2 transition-colors duration-300">
+            <span>Total:</span>
+            <span id="totalAmount">Rp 0</span>
+        </div>
+    </div>
+
+    <button 
+        type="submit"
+        class="w-full py-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 transform hover:scale-105"
+    >
+        Proses Pembayaran
+    </button>
+        </form>
+    </div>
+    <!-- riwayat pembayaran -->
+     <div class="bg-blue-100 dark:bg-gray-800 rounded-xl shadow-lg p-6 transition-all duration-300">
+<div class="flex items-center justify-between mb-6">
+    <div class="flex items-center">
+        <svg class="w-10 h-10 text-green-700 dark:text-green-400 mr-2 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        </svg>
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-white transition-colors duration-300">Riwayat Transaksi</h2>
+    </div>
+    <button 
+        id="clearHistoryBtn"
+        class="px-4 py-2 text-sm bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-300 hidden"
+    >
+        Hapus Semua
+    </button>
+</div>
+<div class="grid grid-cols-3 gap-4 mb-6">
+                    <div class="text-center p-3 bg-blue-50 dark:bg-gray-700 rounded-xl transition-all duration-300">
+                        <div class="text-2xl font-bold text-blue-600 dark:text-blue-400 transition-colors duration-300" id="totalTransactions">0</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-300 transition-colors duration-300">Transaksi</div>
+                    </div>
+                    <div class="text-center p-3 bg-green-50 dark:bg-gray-700 rounded-lg transition-all duration-300">
+                        <div class="text-2xl font-bold text-green-600 dark:text-green-400 transition-colors duration-300" id="totalRevenue">Rp 0</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-300 transition-colors duration-300">Pendapatan</div>
+                    </div>
+                    <div class="text-center p-3 bg-purple-50 dark:bg-gray-700 rounded-lg transition-all duration-300">
+                        <div class="text-2xl font-bold text-purple-600 dark:text-purple-400 transition-colors duration-300" id="avgTransaction">Rp 0</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-300 transition-colors duration-300">Rata-rata</div>
+                    </div>
+                </div>
+
+                <div id="transactionList" class="space-y-3 max-h-96 overflow-y-auto">
+                    <div id="emptyState" class="text-center py-8 text-gray-500 dark:text-gray-400 transition-colors duration-300">
+                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-300 dark:text-gray-600 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        <p class="font-medium">Belum ada transaksi</p>
+                        <p class="text-sm">Lakukan pembayaran pertama Anda!</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
