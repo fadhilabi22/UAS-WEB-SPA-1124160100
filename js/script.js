@@ -26,3 +26,27 @@
             'DISKON': {discount: 20, type: 'percentage', description: 'diskon 20%'},
             '0232': {discount: 25, type: 'percentage', description: 'diskon 25%'}
         };
+ // ===== DARK MODE FUNCTIONALITY =====
+        const toggleDarkMode = document.getElementById('toggleDarkMode');
+        const modeIcon = document.getElementById('modeIcon');
+        const modeText = document.getElementById('modeText');
+
+        function updateDarkModeButton() {
+            const isDark = document.documentElement.classList.contains('dark');
+            modeIcon.textContent = isDark ? '☀️' : '🌙';
+            modeText.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+        }
+
+        toggleDarkMode.addEventListener('click', () => {
+            const isDark = document.documentElement.classList.contains('dark');
+            
+            if (isDark) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            
+            updateDarkModeButton();
+        });
