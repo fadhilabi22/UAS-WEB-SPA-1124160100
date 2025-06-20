@@ -50,3 +50,11 @@
             
             updateDarkModeButton();
         });
+
+  // ===== MENDAPATKAN ELEMEN DOM =====
+        const paymentForm = document.getElementById('paymentForm');
+        const productSelect = document.getElementById('productSelect');
+        const quantity = document.getElementById('quantity');
+        const promoCode = document.getElementById('promoCode');
+        const applyPromoBtn = document.getElementById('applyPromoBtn');
+        const promoMessage = document.getElementById('promoMessage');
