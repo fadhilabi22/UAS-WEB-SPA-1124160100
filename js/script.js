@@ -64,3 +64,8 @@
         const discountEl = document.getElementById('discount');
         const discountRow = document.getElementById('discountRow');
         const totalAmountEl = document.getElementById('totalAmount');
+
+          // Elemen riwayat transaksi
+        const transactionList = document.getElementById('transactionList');
+        const emptyState = document.getElementById('emptyState');
+        const clearHistoryBtn = document.getElementById('clearHistoryBtn');
