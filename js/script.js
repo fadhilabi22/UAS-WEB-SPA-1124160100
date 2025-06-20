@@ -252,3 +252,12 @@
             totalRevenueEl.textContent = formatCurrency(totalRevenue);
             avgTransactionEl.textContent = formatCurrency(avgTransaction);
         }
+  // Hapus semua transaksi
+        clearHistoryBtn.addEventListener('click', () => {
+            if (confirm('Anda yakin ingin menghapus semua riwayat transaksi?')) {
+                transactions = [];
+                saveTransactions();
+                renderTransactions();
+                updateStatistics();
+            }
+        });
