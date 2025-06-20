@@ -18,3 +18,11 @@
             'credit': 'Kartu Kredit',
             'cash': 'Bayar Tunai'
         };
+
+        // Kode promo
+        const promoCodes = {
+            'DISKONWOY': {discount: 5, type: 'percentage', description: 'diskon 5%'},
+            'ANJAYDISKON': {discount: 15, type: 'percentage', description: 'diskon 15%'}, // Corrected description
+            'DISKON': {discount: 20, type: 'percentage', description: 'diskon 20%'},
+            '0232': {discount: 25, type: 'percentage', description: 'diskon 25%'}
+        };
