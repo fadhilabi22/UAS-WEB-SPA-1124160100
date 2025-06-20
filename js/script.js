@@ -74,3 +74,8 @@
         const totalTransactionsEl = document.getElementById('totalTransactions');
         const totalRevenueEl = document.getElementById('totalRevenue');
         const avgTransactionEl = document.getElementById('avgTransaction');
+
+        // Modal
+        const paymentModal = document.getElementById('paymentModal');
+        const paymentDetails = document.getElementById('paymentDetails');
+        const closeModalBtn = document.getElementById('closeModalBtn');
