@@ -126,3 +126,22 @@
                 return Math.min(promoData.discount, subtotal);
             }
         }
+          // Update tampilan total
+        function updateTotal() {
+            const subtotal = calculateSubtotal();
+            const promoData = appliedPromoCode ? promoCodes[appliedPromoCode] : null;
+            const discount = calculateDiscount(subtotal, promoData);
+            const total = subtotal - discount;
+
+            subtotalEl.textContent = formatCurrency(subtotal);
+            
+            if (discount > 0) {
+                discountEl.textContent = '-' + formatCurrency(discount);
+                discountRow.classList.remove('hidden');
+            } else {
+                discountRow.classList.add('hidden');
+            }
+            
+            totalAmountEl.textContent = formatCurrency(total);
+            currentDiscount = discount;
+        }
