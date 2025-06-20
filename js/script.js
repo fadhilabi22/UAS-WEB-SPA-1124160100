@@ -145,3 +145,28 @@
             totalAmountEl.textContent = formatCurrency(total);
             currentDiscount = discount;
         }
+ // ===== FUNGSI PROMO CODE =====
+        
+        // Terapkan kode promo
+        function applyPromoCode() {
+            const code = promoCode.value.trim().toUpperCase();
+            
+            if (!code) {
+                showPromoMessage('Masukkan kode promo terlebih dahulu', 'error');
+                return;
+            }
+
+            if (!promoCodes[code]) {
+                showPromoMessage('Kode promo tidak valid', 'error');
+                return;
+            }
+
+            appliedPromoCode = code;
+            updateTotal();
+            showPromoMessage(`Kode promo "${code}" berhasil diterapkan! ${promoCodes[code].description}`, 'success');
+            promoCode.disabled = true;
+            applyPromoBtn.textContent = 'Diterapkan';
+            applyPromoBtn.disabled = true;
+            applyPromoBtn.classList.remove('bg-green-500', 'hover:bg-green-600', 'dark:bg-green-600', 'dark:hover:bg-green-700');
+            applyPromoBtn.classList.add('bg-gray-400', 'dark:bg-gray-600');
+        }
