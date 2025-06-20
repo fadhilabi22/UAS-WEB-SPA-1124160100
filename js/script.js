@@ -79,3 +79,13 @@
         const paymentModal = document.getElementById('paymentModal');
         const paymentDetails = document.getElementById('paymentDetails');
         const closeModalBtn = document.getElementById('closeModalBtn');
+ // ===== FUNGSI UTILITY =====
+        
+        // Format mata uang Rupiah
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
