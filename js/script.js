@@ -69,3 +69,8 @@
         const transactionList = document.getElementById('transactionList');
         const emptyState = document.getElementById('emptyState');
         const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+
+         // Elemen statistik
+        const totalTransactionsEl = document.getElementById('totalTransactions');
+        const totalRevenueEl = document.getElementById('totalRevenue');
+        const avgTransactionEl = document.getElementById('avgTransaction');
