@@ -170,3 +170,13 @@
             applyPromoBtn.classList.remove('bg-green-500', 'hover:bg-green-600', 'dark:bg-green-600', 'dark:hover:bg-green-700');
             applyPromoBtn.classList.add('bg-gray-400', 'dark:bg-gray-600');
         }
+ // Tampilkan pesan promo
+        function showPromoMessage(message, type) {
+            promoMessage.textContent = message;
+            promoMessage.classList.remove('hidden', 'text-red-500', 'text-green-500', 'dark:text-red-400', 'dark:text-green-400');
+            if (type === 'error') {
+                promoMessage.classList.add('text-red-500', 'dark:text-red-400');
+            } else {
+                promoMessage.classList.add('text-green-500', 'dark:text-green-400');
+            }
+        }
