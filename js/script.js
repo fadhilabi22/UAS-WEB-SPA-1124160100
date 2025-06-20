@@ -276,3 +276,83 @@
                 promoMessage.classList.add('hidden');
             }
         });
+  // Handle form submission
+        paymentForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Mencegah reload halaman
+
+            const customerName = document.getElementById('customerName').value.trim();
+            const customerEmail = document.getElementById('customerEmail').value.trim();
+            const selectedProductOption = productSelect.options[productSelect.selectedIndex];
+            const productName = selectedProductOption.textContent.split(' - ')[0]; // Ambil nama produk saja
+            const productPrice = parseInt(selectedProductOption.dataset.price);
+            const qty = parseInt(quantity.value);
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value;
+            const subtotal = calculateSubtotal();
+            const discount = currentDiscount;
+            const totalAmount = subtotal - discount;
+
+            // Validasi sederhana
+            if (!customerName || !customerEmail || !productName || !qty || !paymentMethod) {
+                alert('Harap lengkapi semua bidang yang wajib diisi.');
+                return;
+            }
+
+            const newTransaction = {
+                id: generateTransactionId(),
+                customerName,
+                customerEmail,
+                productName,
+                quantity: qty,
+                unitPrice: productPrice,
+                subtotal,
+                discount,
+                totalAmount,
+                paymentMethod,
+                promoCode: appliedPromoCode || 'Tidak Ada',
+                timestamp: getCurrentTime()
+            };
+
+            transactions.push(newTransaction);
+            saveTransactions();
+            renderTransactions();
+            updateStatistics();
+            
+            // Tampilkan modal konfirmasi
+            showPaymentConfirmation(newTransaction);
+
+            // Reset form
+            paymentForm.reset();
+            resetPromoCode();
+            updateTotal(); // Update total setelah reset form
+        });
+
+        // Tampilkan modal konfirmasi pembayaran
+        function showPaymentConfirmation(transaction) {
+            paymentDetails.innerHTML = `
+                <p class="flex justify-between"><span>ID Transaksi:</span> <strong>${transaction.id}</strong></p>
+                <p class="flex justify-between"><span>Nama Pelanggan:</span> <span>${transaction.customerName}</span></p>
+                <p class="flex justify-between"><span>Email:</span> <span>${transaction.customerEmail}</span></p>
+                <p class="flex justify-between"><span>Produk:</span> <span>${transaction.productName} (${transaction.quantity}x)</span></p>
+                <p class="flex justify-between"><span>Harga Satuan:</span> <span>${formatCurrency(transaction.unitPrice)}</span></p>
+                <p class="flex justify-between"><span>Subtotal:</span> <span>${formatCurrency(transaction.subtotal)}</span></p>
+                <p class="flex justify-between"><span>Diskon:</span> <span>-${formatCurrency(transaction.discount)}</span></p>
+                <p class="flex justify-between"><span>Metode Pembayaran:</span> <span>${paymentMethodNames[transaction.paymentMethod]}</span></p>
+                <p class="flex justify-between text-lg font-semibold border-t pt-2 mt-2"><span>Total Dibayar:</span> <span>${formatCurrency(transaction.totalAmount)}</span></p>
+                <p class="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-2"><span>Waktu Transaksi:</span> <span>${transaction.timestamp}</span></p>
+            `;
+            paymentModal.classList.remove('hidden');
+            paymentModal.classList.add('flex');
+        }
+
+        // Tutup modal konfirmasi pembayaran
+        closeModalBtn.addEventListener('click', () => {
+            paymentModal.classList.add('hidden');
+            paymentModal.classList.remove('flex');
+        });
+
+        // ===== INISIALISASI =====
+        document.addEventListener('DOMContentLoaded', () => {
+            updateDarkModeButton(); // Atur tombol dark mode saat halaman dimuat
+            loadTransactions(); // Muat transaksi yang ada
+            updateTotal(); // Hitung total awal
+        });
