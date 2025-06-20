@@ -104,3 +104,14 @@
         function generateTransactionId() {
             return 'TRX' + Date.now().toString().substr(-8) + Math.random().toString(36).substr(2, 4).toUpperCase();
         }
+ // ===== FUNGSI KALKULASI =====
+        
+        // Hitung subtotal
+        function calculateSubtotal() {
+            const selectedOption = productSelect.options[productSelect.selectedIndex];
+            if (!selectedOption || !selectedOption.dataset.price) return 0;
+            
+            const price = parseInt(selectedOption.dataset.price);
+            const qty = parseInt(quantity.value) || 1;
+            return price * qty;
+        }
