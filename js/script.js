@@ -209,3 +209,8 @@
             renderTransactions();
             updateStatistics();
         }
+
+        // Simpan transaksi ke Local Storage
+        function saveTransactions() {
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+        }
