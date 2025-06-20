@@ -214,3 +214,31 @@
         function saveTransactions() {
             localStorage.setItem('transactions', JSON.stringify(transactions));
         }
+ // Render (tampilkan) daftar transaksi
+        function renderTransactions() {
+            transactionList.innerHTML = ''; // Kosongkan daftar sebelum render ulang
+            if (transactions.length === 0) {
+                emptyState.classList.remove('hidden');
+                clearHistoryBtn.classList.add('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+                clearHistoryBtn.classList.remove('hidden');
+            }
+
+            const template = document.getElementById('transactionTemplate');
+
+            transactions.forEach(transaction => {
+                const clone = document.importNode(template.content, true);
+                clone.querySelector('.transaction-customer').textContent = transaction.customerName;
+                clone.querySelector('.transaction-product').textContent = `${transaction.productName} (${transaction.quantity}x)`;
+                clone.querySelector('.transaction-amount').textContent = formatCurrency(transaction.totalAmount);
+                clone.querySelector('.transaction-time').textContent = transaction.timestamp;
+                
+                const methodSpan = clone.querySelector('.transaction-method');
+                methodSpan.textContent = paymentMethodNames[transaction.paymentMethod];
+                methodSpan.className += ` ${paymentMethodColors[transaction.paymentMethod]}`;
+
+                transactionList.prepend(clone); // Tambahkan ke paling atas
+            });
+        }
