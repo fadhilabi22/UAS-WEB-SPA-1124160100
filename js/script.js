@@ -261,3 +261,18 @@
                 updateStatistics();
             }
         });
+ // ===== EVENT LISTENERS =====
+
+        // Update total saat produk atau jumlah berubah
+        productSelect.addEventListener('change', updateTotal);
+        quantity.addEventListener('input', updateTotal);
+        applyPromoBtn.addEventListener('click', applyPromoCode);
+        promoCode.addEventListener('input', () => {
+            // Reset promo jika input berubah setelah diterapkan
+            if (promoCode.disabled && promoCode.value.toUpperCase() !== appliedPromoCode) {
+                resetPromoCode();
+            } else if (!promoCode.value.trim()) {
+                // Sembunyikan pesan jika input kosong
+                promoMessage.classList.add('hidden');
+            }
+        });
