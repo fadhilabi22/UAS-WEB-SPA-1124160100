@@ -242,3 +242,13 @@
                 transactionList.prepend(clone); // Tambahkan ke paling atas
             });
         }
+   // Update statistik
+        function updateStatistics() {
+            const totalTransactions = transactions.length;
+            const totalRevenue = transactions.reduce((sum, t) => sum + t.totalAmount, 0);
+            const avgTransaction = totalTransactions > 0 ? totalRevenue / totalTransactions : 0;
+
+            totalTransactionsEl.textContent = totalTransactions;
+            totalRevenueEl.textContent = formatCurrency(totalRevenue);
+            avgTransactionEl.textContent = formatCurrency(avgTransaction);
+        }
