@@ -180,3 +180,16 @@
                 promoMessage.classList.add('text-green-500', 'dark:text-green-400');
             }
         }
+  // Reset promo code
+        function resetPromoCode() {
+            appliedPromoCode = '';
+            currentDiscount = 0;
+            promoCode.value = '';
+            promoCode.disabled = false;
+            applyPromoBtn.textContent = 'Terapkan';
+            applyPromoBtn.disabled = false;
+            applyPromoBtn.classList.remove('bg-gray-400', 'dark:bg-gray-600');
+            applyPromoBtn.classList.add('bg-green-500', 'hover:bg-green-600', 'dark:bg-green-600', 'dark:hover:bg-green-700');
+            promoMessage.classList.add('hidden');
+            updateTotal();
+        }
