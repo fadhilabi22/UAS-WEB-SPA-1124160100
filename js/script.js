@@ -115,3 +115,14 @@
             const qty = parseInt(quantity.value) || 1;
             return price * qty;
         }
+
+          // Hitung diskon
+        function calculateDiscount(subtotal, promoData) {
+            if (!promoData) return 0;
+            
+            if (promoData.type === 'percentage') {
+                return Math.round(subtotal * promoData.discount / 100);
+            } else {
+                return Math.min(promoData.discount, subtotal);
+            }
+        }
