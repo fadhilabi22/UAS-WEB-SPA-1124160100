@@ -193,3 +193,19 @@
             promoMessage.classList.add('hidden');
             updateTotal();
         }
+ // ===== FUNGSI RIWAYAT TRANSAKSI =====
+
+        // Muat transaksi dari Local Storage
+        function loadTransactions() {
+            const storedTransactions = localStorage.getItem('transactions');
+            if (storedTransactions) {
+                transactions = JSON.parse(storedTransactions);
+                if (transactions.length > 0) {
+                    // Pastikan transactionIdCounter lebih besar dari ID transaksi terakhir
+                    const lastTransactionIdNum = Math.max(...transactions.map(t => parseInt(t.id.replace('TRX', '').substring(0, 8)) || 0));
+                    transactionIdCounter = lastTransactionIdNum + 1;
+                }
+            }
+            renderTransactions();
+            updateStatistics();
+        }
