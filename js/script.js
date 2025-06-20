@@ -58,3 +58,9 @@
         const promoCode = document.getElementById('promoCode');
         const applyPromoBtn = document.getElementById('applyPromoBtn');
         const promoMessage = document.getElementById('promoMessage');
+    
+          // Elemen untuk menampilkan total
+        const subtotalEl = document.getElementById('subtotal');
+        const discountEl = document.getElementById('discount');
+        const discountRow = document.getElementById('discountRow');
+        const totalAmountEl = document.getElementById('totalAmount');
