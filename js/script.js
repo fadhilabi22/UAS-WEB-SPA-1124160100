@@ -100,3 +100,7 @@
                 minute: '2-digit'
             });
         }
+ // Generate transaction ID
+        function generateTransactionId() {
+            return 'TRX' + Date.now().toString().substr(-8) + Math.random().toString(36).substr(2, 4).toUpperCase();
+        }
